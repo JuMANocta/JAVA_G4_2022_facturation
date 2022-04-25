@@ -1,6 +1,10 @@
 package com.facturation;
 
 import java.awt.Font;
+import java.awt.Color;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -45,6 +49,32 @@ public class addProduct extends JPanel{
         lblCompany.setBounds(246,241,124,21);
         add(lblCompany);
 
-        
+        JButton btnAddProduct = new JButton("Add Product");
+        btnAddProduct.setBounds(449,334,136,23);
+        add(btnAddProduct);
+
+        JTextField quanField = new JTextField();
+        quanField.setColumns(10);
+        quanField.setBounds(449,274,136,20);
+        add(quanField);
+
+        JLabel lblQuantity = new JLabel("Items in Stock");
+        lblQuantity.setFont(new Font("Consolas", Font.PLAIN, 14));
+        lblQuantity.setBounds(246,273,124,21);
+        add(lblQuantity);
+
+        JComboBox<String> compagny = new JComboBox<String>();
+        compagny.setBounds(449,243,136,20);
+        add(compagny);
+
+        compagny.addItem("Socrapec");
+        compagny.addItem("Turjet");
+        compagny.addItem("Paclasauf");
+
+        JLabel error = new JLabel("");
+        error.setForeground(Color.RED);
+        error.setBounds(339,92,256,14);
+        add(error);
+
     }
 }

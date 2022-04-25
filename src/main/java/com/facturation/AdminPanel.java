@@ -7,9 +7,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class AdminPanel extends JFrame {
+public class AdminPanel extends JFrame implements ActionListener {
 
     AdminPanel() {
         setTitle("Admin Panel");
@@ -23,6 +25,7 @@ public class AdminPanel extends JFrame {
         menuBar.add(mnProduct);
 
         JMenuItem itmAddProduct = new JMenuItem("Add Product");
+        itmAddProduct.addActionListener(this);
         mnProduct.add(itmAddProduct);
 
         JMenuItem itmUpdateProduct = new JMenuItem("Update Product");
@@ -35,6 +38,7 @@ public class AdminPanel extends JFrame {
         menuBar.add(mnCashier);
 
         JMenuItem itmAddCashier = new JMenuItem("Add Cashier");
+        itmAddCashier.addActionListener(this);
         mnCashier.add(itmAddCashier);
 
         JMenuItem itmDeleteCashier = new JMenuItem("Delete Cashier");
@@ -69,9 +73,32 @@ public class AdminPanel extends JFrame {
 
         getContentPane().setLayout(new BorderLayout(0,0));
         
-        ArrayList<JPanel> panels = new ArrayList<JPanel>();
         panels.add(new addProduct());
+        panels.add(new addCashier());
 
         getContentPane().add(panels.get(0));
+    }
+    ArrayList<JPanel> panels = new ArrayList<JPanel>();
+    int cPanel=0;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Action performed" + e.getActionCommand());
+        if(e.getActionCommand().equals("Add Product")) {
+            this.remove(panels.get(cPanel));
+            this.revalidate();
+            this.repaint();
+            getContentPane().add(panels.get(0));
+            this.setVisible(true);
+            this.setTitle("Add Product");
+            cPanel = 0;
+        }else if(e.getActionCommand().equals("Add Cashier")) {
+            this.remove(panels.get(cPanel));
+            this.revalidate();
+            this.repaint();
+            getContentPane().add(panels.get(1));
+            this.setVisible(true);
+            this.setTitle("Add Cashier");
+            cPanel = 1;
+        }
     }
 }
