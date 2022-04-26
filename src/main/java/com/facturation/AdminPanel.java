@@ -82,7 +82,7 @@ public class AdminPanel extends JFrame implements ActionListener {
     int cPanel=0;
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Action performed" + e.getActionCommand());
+        System.out.println("Action performed " + e.getActionCommand());
         if(e.getActionCommand().equals("Add Product")) {
             this.remove(panels.get(cPanel));
             this.revalidate();
