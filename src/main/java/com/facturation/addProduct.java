@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -90,34 +92,51 @@ public class addProduct extends JPanel{
 
         error = new JLabel("");
         error.setForeground(Color.RED);
-        error.setBounds(339,92,256,14);
+        error.setBounds(339,92,400,14);
         add(error);
 
         JButton btnAddProduct = new JButton("Add Product");
-        btnAddProduct.setBounds(449,334,136,23);
+        btnAddProduct.setBounds(449,334,256,23);
         add(btnAddProduct);
 
         btnAddProduct.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e) {
+                error.setText("");
                 JOptionPane.showMessageDialog(null, "INSERT BDD \n" 
                 + nameField.getText() + "\n"
                 + descField.getText() + "\n"
                 + company.getSelectedItem() + "\n"
                 + quanField.getText() + "\n"
                 + priceField.getText());
-                testInt(quanField.getText());
+                JtestInt(quanField, "Quantity");
+                JtestDouble(priceField, "Price");
             }
         });
         
     }
-    public int testInt(String s){
+    public boolean JtestInt(JTextField f, String s){
         try{
-            int i = Integer.parseInt(s);
-            return i;
-        }catch(NumberFormatException e){
-            error.setText("Quantity must be a number");
+            Integer.parseInt(f.getText());
+        }catch(NumberFormatException | NullPointerException e){
+            error.setText(s + " must be a number");
+            f.setBackground(Color.RED);
+            return false;
         }
-        return 0;
+        return true;
+    }
+    public boolean JtestDouble(JTextField f, String s){
+        try{
+            Double.parseDouble(f.getText());
+        }catch(NumberFormatException | NullPointerException e){
+            error.setText(s + " must be a double");
+            f.setBorder(new LineBorder(Color.RED, 1));
+            return false;
+        }
+        return true;
+    }
+
+    public boolean testINT(String s){
+        return (Boolean)(Integer.parseInt(s) != 0);
     }
 }
