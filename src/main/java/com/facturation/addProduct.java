@@ -6,12 +6,18 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class addProduct extends JPanel{
+
+    JTextField nameField;
+
     addProduct(){
         setLayout(null);
         setBounds(0,0,840,600);
@@ -26,7 +32,7 @@ public class addProduct extends JPanel{
         lblProductName.setBounds(246,136,124,21);
         add(lblProductName);
 
-        JTextField nameField = new JTextField();
+        nameField = new JTextField();
         nameField.setBounds(449,137,136,20);
         add(nameField);
         nameField.setColumns(10);
@@ -86,5 +92,11 @@ public class addProduct extends JPanel{
         btnAddProduct.setBounds(449,334,136,23);
         add(btnAddProduct);
 
+        btnAddProduct.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, "INSERT BDD " + nameField.getText());
+            }
+        });
     }
 }

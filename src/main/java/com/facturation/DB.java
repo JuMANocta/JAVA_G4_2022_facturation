@@ -18,6 +18,7 @@ public abstract class DB {
             System.out.println("Connected to database");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Pas de connexion à la BDD " + e.getMessage(), "Erreur Connexion", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
         return conn;
     }
