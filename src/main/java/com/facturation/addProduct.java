@@ -17,6 +17,11 @@ import java.awt.event.MouseEvent;
 public class addProduct extends JPanel{
 
     JTextField nameField;
+    JTextArea descField;
+    JComboBox<String> company;
+    JTextField quanField;
+    JTextField priceField;
+    JLabel error;
 
     addProduct(){
         setLayout(null);
@@ -42,7 +47,7 @@ public class addProduct extends JPanel{
         lblProductDescription.setBounds(246,168,139,21);
         add(lblProductDescription);
 
-        JTextArea descField = new JTextArea();
+        descField = new JTextArea();
         descField.setBounds(449,168,136,58);
         add(descField);
 
@@ -55,7 +60,7 @@ public class addProduct extends JPanel{
         lblCompany.setBounds(246,241,124,21);
         add(lblCompany);
 
-        JComboBox<String> company = new JComboBox<String>();
+        company = new JComboBox<String>();
         company.setBounds(449,243,136,20);
         add(company);
 
@@ -68,7 +73,7 @@ public class addProduct extends JPanel{
         lblQuantity.setBounds(246,273,124,21);
         add(lblQuantity);
 
-        JTextField quanField = new JTextField();
+        quanField = new JTextField();
         quanField.setColumns(10);
         quanField.setBounds(449,274,136,20);
         add(quanField);
@@ -78,12 +83,12 @@ public class addProduct extends JPanel{
         lblPrice.setBounds(246,300,124,21);
         add(lblPrice);
 
-        JTextField priceField = new JTextField();
+        priceField = new JTextField();
         priceField.setColumns(10);
         priceField.setBounds(449,301,136,20);
         add(priceField);
 
-        JLabel error = new JLabel("");
+        error = new JLabel("");
         error.setForeground(Color.RED);
         error.setBounds(339,92,256,14);
         add(error);
@@ -95,8 +100,24 @@ public class addProduct extends JPanel{
         btnAddProduct.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(null, "INSERT BDD " + nameField.getText());
+                JOptionPane.showMessageDialog(null, "INSERT BDD \n" 
+                + nameField.getText() + "\n"
+                + descField.getText() + "\n"
+                + company.getSelectedItem() + "\n"
+                + quanField.getText() + "\n"
+                + priceField.getText());
+                testInt(quanField.getText());
             }
         });
+        
+    }
+    public int testInt(String s){
+        try{
+            int i = Integer.parseInt(s);
+            return i;
+        }catch(NumberFormatException e){
+            error.setText("Quantity must be a number");
+        }
+        return 0;
     }
 }

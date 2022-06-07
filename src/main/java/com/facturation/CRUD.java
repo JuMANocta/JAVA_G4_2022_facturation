@@ -51,4 +51,17 @@ public class CRUD {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+    public void insertProduct(Produit p){
+        System.out.println("insertProduct");
+        Connection conn = DB.DBConnection();
+        // try with resources
+        try(Statement stmt = conn.createStatement()){
+            String sql = "INSERT INTO product (name, details, company, quantity, price) VALUES ('" + p.getName() + "', '" + p.getDetail() + "', '" + p.getCompany() + "', " + p.getStock() + ", " + p.getPrice() + ")";
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Produit ajouté");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
 }
