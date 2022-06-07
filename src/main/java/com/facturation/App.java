@@ -6,8 +6,6 @@ public class App
     {
         System.out.println( "Hello World!" );
         AdminPanel adminPanel = new AdminPanel();
-        adminPanel.setVisible(true);
-        DB bdd = new DB();
-        bdd.DBConnection();
+        adminPanel.setVisible(true);       
     }
 }

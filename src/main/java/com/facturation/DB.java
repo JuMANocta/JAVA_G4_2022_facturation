@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 
 import javax.swing.JOptionPane;
 
-public class DB {
-    Connection DBConnection(){
+public abstract class DB {
+    static Connection DBConnection(){
         Connection conn = null;
         String url = "jdbc:mysql://localhost:3306/facturation";
         String user = "root";
