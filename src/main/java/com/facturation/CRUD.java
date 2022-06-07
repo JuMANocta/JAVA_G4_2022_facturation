@@ -25,7 +25,17 @@ public class CRUD {
             }
         }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            if(e.getSQLState().equals("42S02")){
+                int retour = JOptionPane.showOptionDialog(null, "La table n'existe pas ... Voulez vous créer la table ?", "Créer table", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+                if(retour == JOptionPane.OK_OPTION){
+                        creationTable();
+                }else{
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur SQL", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     public void creationTable(){
@@ -33,9 +43,9 @@ public class CRUD {
         Connection conn = DB.DBConnection();
         // try with resources
         try(Statement stmt = conn.createStatement()){
-            String sql = "CREATE TABLE product (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), details TEXT, company VARCHAR(255), quantity INTEGER, PRICE DOUBLE)";
+            String sql = "CREATE TABLE product (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), details TEXT, company VARCHAR(255), quantity INT, PRICE DOUBLE)";
             stmt.executeUpdate(sql);
-            System.out.println("Table product created");
+            JOptionPane.showMessageDialog(null, "Table créée");
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());

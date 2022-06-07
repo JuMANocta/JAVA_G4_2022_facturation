@@ -6,6 +6,8 @@ public class App
     {
         System.out.println( "Hello World!" );
         AdminPanel adminPanel = new AdminPanel();
-        adminPanel.setVisible(true);       
+        adminPanel.setVisible(true);
+        CRUD crud = new CRUD();
+        crud.select();
     }
 }
